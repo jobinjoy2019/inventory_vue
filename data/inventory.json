@@ -1,0 +1,111 @@
+[
+  {
+    "category": "Provisions",
+    "items": [
+      { "name": "Oil" },
+      { "name": "Ghee" },
+      { "name": "Besan" },
+      { "name": "Rice" },
+      { "name": "Poha" },
+      { "name": "Sooji" },
+      { "name": "Moong daal" },
+      { "name": "Chana daal" },
+      { "name": "Toor daal" },
+      { "name": "Pappad" },
+      { "name": "Tea" },
+      { "name": "Sugar" },
+      { "name": "Vermicelli" },
+      { "name": "Peanuts" },
+      { "name": "Cashew" },
+      { "name": "Kishmish" },
+      { "name": "Sev" },
+      { "name": "Corn starch" },
+      { "name": "Mustard" },
+      { "name": "Salt" },
+      { "name": "Instant Coffee Powder" }
+    ]
+  },
+  {
+    "category": "Masala",
+    "items": [
+      { "name": "Red Chilli powder" },
+      { "name": "Turmeric" },
+      { "name": "Coriander Powder" },
+      { "name": "Garam Masala" },
+      { "name": "Dried red Chillies" },
+      { "name": "Whole Jeera" },
+      { "name": "Jeera Powder" },
+      { "name": "Ginger Garlic Paste" },
+      { "name": "Chicken Masala" },
+      { "name": "Kitchen King (everest)" },
+      { "name": "Meat Masala" },
+      { "name": "Sambhar Masala" },
+      { "name": "Kulambu" },
+      { "name": "Chicken Kebab" },
+      { "name": "Elaichi (Cardamom)" },
+      { "name": "Dalchini (Cinnamon)" },
+      { "name": "Laung (Cloves)" },
+      { "name": "Kali Mirch (Black Pepper)" },
+      { "name": "Chakri Fool (Star Anise)" },
+      { "name": "Badi Elaichi (Black Cardamom)" },
+      { "name": "Tez Patta (Bay leaves)" },
+      { "name": "Shahi Jeera" },
+      { "name": "Heeng (Asafoetida)" },
+      { "name": "Saunf" },
+      { "name": "Ajwain" },
+      { "name": "Kasuri Methi" }
+    ]
+  },
+  {
+    "category": "Condiments",
+    "items": [
+      { "name": "Ketchup" },
+      { "name": "Mayo" },
+      { "name": "Pickle" }
+    ]
+  },
+  {
+    "category": "Disposables",
+    "inputType": "toggle",
+    "items": [
+      { "name": "Juice cups" },
+      { "name": "Tea cups" },
+      { "name": "Paper Napkins" },
+      { "name": "Kitchen cloth towels" },
+      { "name": "Serving gloves" },
+      { "name": "Paper plates" }
+    ]
+  },
+  {
+    "category": "Packaging Material",
+    "inputType": "toggle",
+    "items": [
+      { "name": "Foil bags 10x14" },
+      { "name": "Foil bags 7x9" },
+      { "name": "Rubber bands" },
+      { "name": "Sandwich wrap" },
+      { "name": "Aluminium foil" },
+      { "name": "Polythene bags" }
+    ]
+  },
+  {
+    "category": "Cleaning Products",
+    "inputType": "toggle",
+    "items": [
+      { "name": "Dish liquid (Vim)" },
+      { "name": "Dish bar soap" },
+      { "name": "Handwash liquid" },
+      { "name": "Garbage bags" },
+      { "name": "Phenyl floor cleaner" },
+      { "name": "Dish scrubber" },
+      { "name": "Disposable kitchen wipe roll" },
+      { "name": "Mop" },
+      { "name": "Domex harpic" },
+      { "name": "Colin spray" },
+      { "name": "Cleaning Gloves" },
+      { "name": "Floor Wipers" },
+      { "name": "Plastic broom" },
+      { "name": "Large Floor mop" }
+    ]
+  }
+]
