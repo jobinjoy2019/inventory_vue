@@ -55,7 +55,7 @@ const showModal = ref(false)
 const modalType = ref('alert')
 const modalTitle = ref('')
 const modalMessage = ref('')
-const appScriptURL = ref('https://script.google.com/macros/s/AKfycbwhFA938jl0ORBAZVFjkS4n72_V15GJVWCqxDB1Y3GcP_SHTQ4PcWUTXoMQ_PcdHyZQ/exec');
+const appScriptURL = ref('https://script.google.com/macros/s/AKfycbxfYhuSVgCmuIujH5XpCLi80h5uL3YzFfkEEGn7JfzeyR0FUROXiayHtJfl2zPJbOek/exec');
 let modalCallback = null
 
 // Fetch inventory from public/inventory.json
@@ -301,9 +301,11 @@ async function submitForm() {
     try {
         const response = await fetch(appScriptURL.value, {
             method: 'POST',
-            mode: 'cors', // Use 'no-cors' to avoid CORS issues with Apps Script
+            mode: 'no-cors', // Use 'no-cors' to avoid CORS issues with Apps Script
             headers: {
-                'Content-Type': 'application/json',
+                "Content-Type": "application/json",
+                "Content-Length": body.length,
+                "Host": "script.google.com",
             },
             body: JSON.stringify(formData)
         });
