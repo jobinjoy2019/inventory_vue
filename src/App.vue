@@ -303,9 +303,7 @@ async function submitForm() {
             method: 'POST',
             mode: 'no-cors', // Use 'no-cors' to avoid CORS issues with Apps Script
             headers: {
-                "Content-Type": "application/json",
-                "Content-Length": body.length,
-                "Host": "script.google.com",
+                "Content-Type": "text/plain"
             },
             body: JSON.stringify(formData)
         });
