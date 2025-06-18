@@ -55,7 +55,7 @@ const showModal = ref(false)
 const modalType = ref('alert')
 const modalTitle = ref('')
 const modalMessage = ref('')
-const appScriptURL = ref('https://script.google.com/macros/s/AKfycbzoA-TMRTJHWaiEIYtzgLVbQkihAI0O5hTd8Grn-j_vbaHGNu2_TyEeObREXtprOtyy/exec');
+const appScriptURL = ref('https://script.google.com/macros/s/AKfycbz7qbVmwVvrnUKpq0OtoPZKRCOEZU6OefLNSqRBivHA8CPYe_gwv4y6ssB0BrLjlYTY/exec');
 let modalCallback = null
 
 // Fetch inventory from public/inventory.json
