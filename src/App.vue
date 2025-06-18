@@ -68,7 +68,7 @@ onMounted(async () => {
     }
     formId.value = currentFormId;
     try {
-        const res = await fetch(`${import.meta.env.BASE_URL}data/inventory.json`)
+        const res = await fetch(`./data/inventory.json`)
         if (res.ok) {
             const fetchedData = await res.json();
             originalInventory.value = fetchedData.map(section => {
