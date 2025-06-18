@@ -301,6 +301,7 @@ async function submitForm() {
     try {
         const response = await fetch(appScriptURL.value, {
             method: 'POST',
+            mode: 'cors', // Use 'no-cors' to avoid CORS issues with Apps Script
             headers: {
                 'Content-Type': 'application/json',
             },
