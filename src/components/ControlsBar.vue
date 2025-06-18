@@ -1,25 +1,32 @@
 <template>
   <div class="relative">
-    <div class="flex flex-col sm:flex-row justify-between items-center gap-4 mb-6">
-      <!-- Expand/Collapse on the left -->
-      <div class="flex gap-4">
+    <!-- Wrapper -->
+    <div class="mb-6">
+      <!-- Row 1: Expand / Collapse -->
+      <div class="flex justify-start gap-4 mb-2 sm:mb-0 sm:justify-start sm:flex-row">
         <button type="button" @click="$emit('expand-all')" class="text-blue-600 flex items-center gap-1">
           <i class="ri-arrow-down-s-line ri-lg mr-1"></i> Expand All
         </button>
-
         <button type="button" @click="$emit('collapse-all')" class="text-blue-600 flex items-center gap-1">
           <i class="ri-arrow-up-s-line ri-lg mr-1"></i> Collapse All
         </button>
       </div>
 
-      <!-- Search bar on the right -->
-      <div class="relative">
-        <svg class="w-5 h-5 text-gray-400 absolute left-3 top-1/2 -translate-y-1/2" fill="none" stroke="currentColor"
-          stroke-width="2" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-        </svg>
-        <input type="text" class="pl-10 pr-4 py-2 border rounded w-full sm:w-64" placeholder="Search..."
-          :value="searchQuery" @input="$emit('update:searchQuery', $event.target.value)" />
+      <!-- Row 2: Search Bar -->
+      <div class="flex justify-end sm:justify-end">
+        <div class="relative w-full sm:w-64">
+          <svg class="w-5 h-5 text-gray-400 absolute left-3 top-1/2 -translate-y-1/2" fill="none" stroke="currentColor"
+            stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round"
+              d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+          </svg>
+          <input
+            type="text"
+            class="pl-10 pr-4 py-2 border rounded w-full"
+            placeholder="Search..."
+            :value="searchQuery"
+            @input="$emit('update:searchQuery', $event.target.value)" />
+        </div>
       </div>
     </div>
 
@@ -49,5 +56,3 @@ function scrollToBottom() {
   window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' })
 }
 </script>
-
-<style scoped></style>

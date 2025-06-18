@@ -22,8 +22,8 @@
             </div>
             <!-- Footer Controls (Submit, Reset, Save as Draft) -->
             <div class="mt-10">
-                <FooterControls @save-draft="showSaveDraftConfirmation"
-                    @reset-form="showResetConfirmation" @export-pdf="exportToPdf" />
+                <FooterControls @save-draft="showSaveDraftConfirmation" @reset-form="showResetConfirmation"
+                    @export-pdf="exportToPdf" />
             </div>
         </form>
 
@@ -60,13 +60,16 @@ let modalCallback = null
 
 // Fetch inventory from public/inventory.json
 onMounted(async () => {
-    // Initialize formId or load from local storage
-    let currentFormId = localStorage.getItem('currentFormId');
-    if (!currentFormId) {
-        currentFormId = generateFormId();
-        localStorage.setItem('currentFormId', currentFormId);
+    const savedDraft = localStorage.getItem('inventoryDraft');
+    if (savedDraft) {
+        const draft = JSON.parse(savedDraft);
+        department.value = draft.department || '';
+        submittedBy.value = draft.submittedBy || '';
+        formId.value = draft.formId || generateFormId();
+        originalInventory.value = draft.inventoryData || [];
+    } else {
+        formId.value = generateFormId(); // fresh form ID if no draft
     }
-    formId.value = currentFormId;
     try {
         const res = await fetch(`./data/inventory.json`)
         if (res.ok) {
@@ -94,6 +97,20 @@ onMounted(async () => {
     }
 })
 
+watch(
+    [department, submittedBy, originalInventory],
+    () => {
+        const draft = {
+            department: department.value,
+            submittedBy: submittedBy.value,
+            formId: formId.value,
+            inventoryData: originalInventory.value
+        };
+        localStorage.setItem('inventoryDraft', JSON.stringify(draft));
+        localStorage.setItem('currentFormId', formId.value); // optional
+    },
+    { deep: true }
+);
 // Filter inventory based on searchQuery
 const filteredInventory = computed(() => {
     if (!searchQuery.value.trim()) {
