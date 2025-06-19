@@ -1,6 +1,6 @@
 <template>
     <div class="min-h-screen bg-gray-100 text-gray-800 space-y-10">
-        <form @submit.prevent="submitForm">
+        <form @submit.prevent="submitForm" @keydown.enter.prevent>
             <!-- Exportable content wrapper -->
             <div class="report-content">
                 <!-- White page header -->
@@ -320,7 +320,12 @@ async function submitForm() {
         await showCustomModal('success', 'Form Submitted', 'Your inventory has been submitted successfully!');
         localStorage.removeItem('inventoryDraft');
         localStorage.removeItem('currentFormId');
-        originalInventory.value = []; // Clear inventory
+
+        // Clear form fields
+        department.value = '';
+        submittedBy.value = '';
+        formId.value = generateFormId(); // Start fresh with new form ID
+        originalInventory.value = [];
     } catch (error) {
         console.warn('Submit Error:', error);
         await showCustomModal('error', 'Validate the submission by checking the sheet');
