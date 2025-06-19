@@ -63,11 +63,11 @@ onMounted(async () => {
     const hasDraft = localStorage.getItem('draftSaved') === 'true';
     const savedDraft = localStorage.getItem('inventoryDraft');
     if (hasDraft && savedDraft) {
-        const draft = JSON.parse(hasDraft);
-        department.value = draft.department || '';
-        submittedBy.value = draft.submittedBy || '';
-        formId.value = draft.formId || generateFormId(); // Use saved formId
-        originalInventory.value = draft.inventoryData || [];
+        const loaddraft = JSON.parse(savedDraft);
+        department.value = loaddraft.department || '';
+        submittedBy.value = loaddraft.submittedBy || '';
+        formId.value = loaddraft.formId || generateFormId(); // Use saved formId
+        originalInventory.value = loaddraft.inventoryData || [];
     } else {
         // No draft: start clean
         localStorage.removeItem('inventoryDraft');
