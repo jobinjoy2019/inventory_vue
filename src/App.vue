@@ -301,22 +301,20 @@ async function submitForm() {
     try {
         const response = await fetch(appScriptURL.value, {
             method: 'POST',
+            mode: 'no-cors', // Use 'no-cors' to avoid CORS issues with Apps Script
             headers: {
                 "Content-Type": "text/plain"
             },
             body: JSON.stringify(formData)
         });
-
-        console.log('Response status:', response.status);
-
         // This will likely be false because Apps Script returns 302 or opaque response
         await showCustomModal('success', 'Form Submitted', 'Your inventory has been submitted successfully!');
         localStorage.removeItem('inventoryDraft');
         localStorage.removeItem('currentFormId');
         originalInventory.value = []; // Clear inventory
     } catch (error) {
-        console.error('Submit Error:', error);
-        await showCustomModal('error', 'Submission Failed', 'There was an error submitting your inventory.');
+        console.warn('Submit Error:', error);
+        await showCustomModal('error', 'Validate the submission by checking the sheet');
     }
 }
 </script>
