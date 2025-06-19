@@ -244,14 +244,17 @@ async function showResetConfirmation() {
     }
 }
 
-function resetForm() {
+function resetForm(immediate = false) {
     localStorage.removeItem('inventoryDraft');
     localStorage.removeItem('currentFormId');
 
-    // Wait a short moment to let the success modal render before reloading
-    setTimeout(() => {
+    if (immediate) {
         location.reload();
-    }, 1500); // Delay reload by 1.5 seconds
+    } else {
+        setTimeout(() => {
+            location.reload();
+        }, 1500);
+    }
 }
 // --- PDF Export ---
 async function exportToPdf() {
@@ -318,14 +321,7 @@ async function submitForm() {
         });
         // This will likely be false because Apps Script returns 302 or opaque response
         await showCustomModal('success', 'Form Submitted', 'Your inventory has been submitted successfully!');
-        localStorage.removeItem('inventoryDraft');
-        localStorage.removeItem('currentFormId');
-
-        // Clear form fields
-        department.value = '';
-        submittedBy.value = '';
-        formId.value = generateFormId(); // Start fresh with new form ID
-        originalInventory.value = [];
+        resetForm(true); // Reset immediately after submission
     } catch (error) {
         console.warn('Submit Error:', error);
         await showCustomModal('error', 'Validate the submission by checking the sheet');
