@@ -60,15 +60,22 @@ let modalCallback = null
 
 // Fetch inventory from public/inventory.json
 onMounted(async () => {
+    const hasDraft = localStorage.getItem('draftSaved') === 'true';
     const savedDraft = localStorage.getItem('inventoryDraft');
-    if (savedDraft) {
-        const draft = JSON.parse(savedDraft);
+    if (hasDraft && savedDraft) {
+        const draft = JSON.parse(hasDraft);
         department.value = draft.department || '';
         submittedBy.value = draft.submittedBy || '';
-        formId.value = draft.formId || generateFormId();
+        formId.value = draft.formId || generateFormId(); // Use saved formId
         originalInventory.value = draft.inventoryData || [];
     } else {
-        formId.value = generateFormId(); // fresh form ID if no draft
+        // No draft: start clean
+        localStorage.removeItem('inventoryDraft');
+        localStorage.removeItem('currentFormId');
+        formId.value = generateFormId();
+        department.value = '';
+        submittedBy.value = '';
+        originalInventory.value = [];
     }
     try {
         const res = await fetch(`./data/inventory.json`)
@@ -210,6 +217,8 @@ function saveDraft() {
     try {
         const draft = JSON.stringify(originalInventory.value);
         localStorage.setItem('inventoryDraft', draft);
+        localStorage.setItem('draftSaved', 'true');
+        localStorage.setItem('currentFormId', formId.value); // Save current formId
         console.log('Draft saved to localStorage.');
     } catch (error) {
         console.error('Error saving draft:', error);
