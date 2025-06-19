@@ -73,7 +73,6 @@ onMounted(async () => {
         localStorage.removeItem('inventoryDraft');
         localStorage.removeItem('currentFormId');
         formId.value = generateFormId();
-        department.value = '';
         submittedBy.value = '';
         originalInventory.value = [];
     }
@@ -105,7 +104,7 @@ onMounted(async () => {
 })
 
 watch(
-    [department, submittedBy, originalInventory],
+    [submittedBy, originalInventory],
     () => {
         const draft = {
             department: department.value,
