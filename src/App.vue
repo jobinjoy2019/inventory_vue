@@ -299,7 +299,7 @@ async function submitForm() {
     };
 
     try {
-        const response = await fetch(appScriptURL.value, {
+        await fetch(appScriptURL.value, {
             method: 'POST',
             mode: 'no-cors', // Use 'no-cors' to avoid CORS issues with Apps Script
             headers: {
