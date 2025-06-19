@@ -308,7 +308,7 @@ async function submitForm() {
         formId: formId.value,
         inventoryData: JSON.stringify(originalInventory.value)
     };
-
+    console.log('Submitting form data:', formData);
     try {
         await fetch(appScriptURL.value, {
             method: 'POST',
