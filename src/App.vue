@@ -47,7 +47,7 @@ import html2canvas from 'html2canvas'
 
 const today = new Date().toISOString().split('T')[0]
 const formId = ref('')
-const department = ref('')
+const department = ref('Hospitality')
 const submittedBy = ref('')
 const searchQuery = ref('')
 const originalInventory = ref([])
