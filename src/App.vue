@@ -114,6 +114,7 @@ watch(
             department: department.value,
             submittedBy: submittedBy.value,
             formId: formId.value,
+            notes: notes.value,
             inventoryData: originalInventory.value
         };
         localStorage.setItem('inventoryDraft', JSON.stringify(draft));
