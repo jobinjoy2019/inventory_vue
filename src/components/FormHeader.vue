@@ -4,7 +4,7 @@
       
       <!-- Left: Logo -->
       <div class="flex justify-center sm:justify-start">
-        <img src="/data/WCC-logo-black.png" alt="Logo" class="h-20 sm:h-28 w-auto" />
+        <img src="/data/WCC-Original-Black.png" alt="Logo" class="h-20 sm:h-28 w-auto" />
       </div>
 
       <!-- Center: Title -->

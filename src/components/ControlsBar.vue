@@ -17,14 +17,9 @@
         <div class="relative w-full sm:w-64">
           <svg class="w-5 h-5 text-gray-400 absolute left-3 top-1/2 -translate-y-1/2" fill="none" stroke="currentColor"
             stroke-width="2" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round"
-              d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+            <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
           </svg>
-          <input
-            type="text"
-            class="pl-10 pr-4 py-2 border rounded w-full"
-            placeholder="Search..."
-            :value="searchQuery"
+          <input type="text" class="pl-10 pr-4 py-2 border rounded w-full" placeholder="Search..." :value="searchQuery"
             @input="$emit('update:searchQuery', $event.target.value)" />
         </div>
       </div>
@@ -32,12 +27,19 @@
 
     <!-- Floating scroll buttons -->
     <div class="fixed bottom-4 right-4 flex flex-col gap-2 z-50">
-      <button type="button" @click="scrollToTop"
-        class="w-10 h-10 bg-blue-600 text-white rounded-full flex items-center justify-center shadow hover:bg-blue-500">
+      <!-- Scroll to Top Button -->
+      <button type="button" @click="scrollToTop" :class="[
+        'w-10 h-10 rounded-full flex items-center justify-center shadow transition-colors',
+        atTop ? 'bg-gray-400 cursor-default' : 'bg-gradient-to-br from-primary to-secondary hover:from-primary hover:to-secondary text-white'
+      ]">
         <i class="ri-arrow-up-line text-xl"></i>
       </button>
-      <button type="button" @click="scrollToBottom"
-        class="w-10 h-10 bg-blue-600 text-white rounded-full flex items-center justify-center shadow hover:bg-blue-500">
+
+      <!-- Scroll to Bottom Button -->
+      <button type="button" @click="scrollToBottom" :class="[
+        'w-10 h-10 rounded-full flex items-center justify-center shadow transition-colors',
+        atBottom ? 'bg-gray-400 cursor-default' : 'bg-gradient-to-br from-primary to-secondary hover:from-primary hover:to-secondary text-white'
+      ]">
         <i class="ri-arrow-down-line text-xl"></i>
       </button>
     </div>
@@ -45,14 +47,32 @@
 </template>
 
 <script setup>
+
+import { ref, onMounted, onUnmounted } from 'vue';
 const props = defineProps(['searchQuery'])
 const emit = defineEmits(['update:searchQuery', 'expand-all', 'collapse-all'])
 
-function scrollToTop() {
-  window.scrollTo({ top: 0, behavior: 'smooth' })
-}
+const atTop = ref(true);
+const atBottom = ref(false);
 
-function scrollToBottom() {
-  window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' })
-}
+const checkScrollPosition = () => {
+  const scrollTop = window.scrollY;
+  const scrollHeight = document.documentElement.scrollHeight;
+  const windowHeight = window.innerHeight;
+
+  atTop.value = scrollTop === 0;
+  atBottom.value = scrollTop + windowHeight >= scrollHeight - 1; // tolerate 1px offset
+};
+
+const scrollToTop = () => window.scrollTo({ top: 0, behavior: 'smooth' });
+const scrollToBottom = () => window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+
+onMounted(() => {
+  window.addEventListener('scroll', checkScrollPosition);
+  checkScrollPosition();
+});
+
+onUnmounted(() => {
+  window.removeEventListener('scroll', checkScrollPosition);
+});
 </script>

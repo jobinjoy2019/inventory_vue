@@ -26,7 +26,7 @@
                 </div>
 
                 <!-- Right side: Submit -->
-                <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">
+                <button type="submit" class="bg-gradient-to-br from-primary to-secondary hover:from-secondary hover:to-primary text-white px-4 py-2 rounded transition-all duration-300"">
                     Submit Inventory
                 </button>
 
@@ -42,8 +42,8 @@
                     <p class="text-sm">© 2025 Kitchen Inventory System. All rights reserved.</p>
                 </div>
 
-                <!-- Right: Menu Links -->
-                <div class="flex items-center space-x-4">
+                <!-- Right: Menu Links with extra margin -->
+                <div class="flex items-center space-x-4 pr-6 md:pr-12 lg:pr-16 xl:pr-20">
                     <a class="text-gray-300 hover:text-white flex items-center" href="#">
                         <i class="ri-settings-line mr-1"></i>
                         <span>Settings</span>
