@@ -17,7 +17,8 @@
                         @expand-all="expandAll" @collapse-all="collapseAll" />
 
                     <!-- Inventory Items -->
-                    <InventorySection :inventory="filteredInventory" @toggle-section="toggleSection" />
+                    <InventorySection :inventory="filteredInventory" @toggle-section="toggleSection" :notes="notes"
+                        @update:notes="notes = $event" />
                 </div>
             </div>
             <!-- Footer Controls (Submit, Reset, Save as Draft) -->
@@ -51,11 +52,12 @@ const department = ref('Hospitality')
 const submittedBy = ref('')
 const searchQuery = ref('')
 const originalInventory = ref([])
+const notes = ref('');
 const showModal = ref(false)
 const modalType = ref('alert')
 const modalTitle = ref('')
 const modalMessage = ref('')
-const appScriptURL = ref('https://script.google.com/macros/s/AKfycbxfYhuSVgCmuIujH5XpCLi80h5uL3YzFfkEEGn7JfzeyR0FUROXiayHtJfl2zPJbOek/exec');
+const appScriptURL = ref('https://script.google.com/macros/s/AKfycbxeGxLBYKMncmfPB6uXU-kvLvDIMsocnLkTgPMlDlPVfna6nfcEsc1YvQO2EujxrYky/exec');
 let modalCallback = null
 
 // Fetch inventory from public/inventory.json
@@ -66,6 +68,7 @@ onMounted(async () => {
         const loaddraft = JSON.parse(savedDraft);
         department.value = loaddraft.department || '';
         submittedBy.value = loaddraft.submittedBy || '';
+        notes.value = loaddraft.notes || '';
         formId.value = loaddraft.formId || generateFormId(); // Use saved formId
         originalInventory.value = loaddraft.inventoryData || [];
     } else {
@@ -74,6 +77,7 @@ onMounted(async () => {
         localStorage.removeItem('currentFormId');
         formId.value = generateFormId();
         submittedBy.value = '';
+        notes.value = '';
         originalInventory.value = [];
     }
     try {
@@ -214,16 +218,23 @@ async function showSaveDraftConfirmation() {
 
 function saveDraft() {
     try {
-        const draft = JSON.stringify(originalInventory.value);
-        localStorage.setItem('inventoryDraft', draft);
+        const draft = {
+            department: department.value,
+            submittedBy: submittedBy.value,
+            formId: formId.value,
+            notes: notes.value,
+            inventoryData: originalInventory.value
+        };
+        localStorage.setItem('inventoryDraft', JSON.stringify(draft));
         localStorage.setItem('draftSaved', 'true');
-        localStorage.setItem('currentFormId', formId.value); // Save current formId
+        localStorage.setItem('currentFormId', formId.value);
         console.log('Draft saved to localStorage.');
     } catch (error) {
         console.error('Error saving draft:', error);
         showCustomModal('error', 'Error Saving Draft', 'Could not save draft. Please try again.');
     }
 }
+
 
 // --- Reset Form ---
 async function showResetConfirmation() {
@@ -246,6 +257,7 @@ async function showResetConfirmation() {
 function resetForm(immediate = false) {
     localStorage.removeItem('inventoryDraft');
     localStorage.removeItem('currentFormId');
+    localStorage.removeItem('draftSaved');
 
     if (immediate) {
         location.reload();
@@ -306,7 +318,8 @@ async function submitForm() {
         department: department.value,
         submittedBy: submittedBy.value,
         formId: formId.value,
-        inventoryData: JSON.stringify(originalInventory.value)
+        inventoryData: JSON.stringify(originalInventory.value),
+        notes: notes.value
     };
     console.log('Submitting form data:', formData);
     try {
